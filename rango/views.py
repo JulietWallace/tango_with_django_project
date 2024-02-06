@@ -23,7 +23,9 @@ def index1(request):
     return response
 
 def index(request):
-    return HttpResponse("Rango says hey there partner!<a href='/rango/about/'>About</a>")
+    context_dict = {'boldmessage': 'Crunchy, creamy, cookie, candy, cupcake!'}
+    return render(request, 'rango/index.html', context=context_dict)
+
 
 def about1(request):
     context_dict = {}
@@ -33,7 +35,7 @@ def about1(request):
     return render(request, 'rango/about.html', context=context_dict)
 
 def about(request):
-    return HttpResponse("Rango says here is the about page. <a href='/rango/'>Index</a>")
+    return render(request, 'rango/about.html')
 
 def show_category(request, category_name_slug):
     context_dict={}
