@@ -11,7 +11,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 
-def index(request):
+def index1(request):
     category_list=Category.objects.order_by('-likes')[:5]
     page_list=Page.objects.order_by('-views')[:5]
     context_dict={}
@@ -22,12 +22,18 @@ def index(request):
     response = render(request, 'rango/index.html', context=context_dict)
     return response
 
-def about(request):
+def index(request):
+    return HttpResponse("Rango says hey there partner!<a href='/rango/about/'>About</a>")
+
+def about1(request):
     context_dict = {}
     context_dict['message'] = {'boldmessage': 'Crunchy, creamy, cookie, candy, cupcake!'}
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
     return render(request, 'rango/about.html', context=context_dict)
+
+def about(request):
+    return HttpResponse("Rango says here is the about page. <a href='/rango/'>Index</a>")
 
 def show_category(request, category_name_slug):
     context_dict={}
